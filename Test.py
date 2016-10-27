@@ -12,5 +12,8 @@ import time
 
 print 'hello'
 b=webdriver.Firefox()
+print '1'
 b.get('http://192.168.9.32:8080/smallcell/')
+print '2'
 b.maximize_window()
+print '3'
