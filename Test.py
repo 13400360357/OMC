@@ -11,3 +11,6 @@ import time
 # print b.find_element_by_xpath('/html/body').text
 
 print 'hello'
+b=webdriver.Firefox()
+b.get('http://192.168.9.32:8080/smallcell/')
+b.maximize_window()
