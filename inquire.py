@@ -79,7 +79,7 @@ def inquire(b):
             if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+'LST_RESULT-'+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
                 workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+'LST_RESULT-'+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
                 worksheet1 = workbook.add_worksheet()
-                print u'生成Excel文件为： '+os.getcwd()+os.sep+'report'+os.sep+'LST_RESULT-'+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
+                print '生成Excel文件为： '+os.getcwd()+os.sep+'report'+os.sep+'LST_RESULT-'+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
                 #===========================================================
                 # '目前不需要读取模块，暂时注释掉'
                 # readexcel = xlrd.open_workbook(u'基站信息查询'+datetime.now().date().isoformat()+u'号'+str(excelnum)+'.xlsx')
@@ -88,7 +88,7 @@ def inquire(b):
     else: 
         workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+'LST_RESULT-'+datetime.now().date().isoformat()+'.xlsx')
         worksheet1 = workbook.add_worksheet()
-        print u'生成Excel文件为： '+os.getcwd()+os.sep+'report'+os.sep+'LST_RESULT-'+datetime.now().date().isoformat()+'.xlsx'
+        print '生成Excel文件为： '+os.getcwd()+os.sep+'report'+os.sep+'LST_RESULT-'+datetime.now().date().isoformat()+'.xlsx'
         #===================================================================
         # '目前不需要读取模块，暂时注释掉'
         # readexcel = xlrd.open_workbook(u'基站信息查询'+datetime.now().date().isoformat()+'.xlsx')
