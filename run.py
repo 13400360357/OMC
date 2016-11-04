@@ -1,4 +1,4 @@
-#coding=utf-8
+#coding:utf-8
 
 import tkMessageBox
 from omc_modify import *
