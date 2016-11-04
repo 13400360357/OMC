@@ -14,6 +14,7 @@ time.sleep(0.5)
 print 'haha'
 print '哈哈'
 print u'生成Excel文件为： '+os.getcwd()+os.sep+'report'+os.sep+'LST_RESULT-'+datetime.now().date().isoformat()+'.xlsx'
+print 'lala'
 # print 'hello'
 # b=webdriver.Firefox()
 # print '1'
