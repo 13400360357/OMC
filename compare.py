@@ -20,7 +20,7 @@ Created on 2016年9月29日
 '''
 def compare(excel1,excel2):
     '创建文件'
-    if  os.path.exists(u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+'.xlsx'):
+    if  os.path.exists(os.getcwd()+os.sep+'report'+os.sep+u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+'.xlsx'):
         excelnum=0
         while 1:
             excelnum +=1
@@ -29,21 +29,21 @@ def compare(excel1,excel2):
             # if excelnum >20:
             #     break
             #===============================================================
-            if not os.path.exists(u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+u'号'+str(excelnum)+'.xlsx'):
-                workbook = xlsxwriter.Workbook(u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+u'号'+str(excelnum)+'.xlsx')
+            if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+u'号'+str(excelnum)+'.xlsx'):
+                workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+u'号'+str(excelnum)+'.xlsx')
                 worksheet1 = workbook.add_worksheet()
                 print '222'
-                print u'生成Excel文件为： '+ u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+u'号'+str(excelnum)+'.xlsx'
+                print u'生成Excel文件为： '+os.getcwd()+os.sep+'report'+os.sep+ u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+u'号'+str(excelnum)+'.xlsx'
                 #===========================================================
                 # '目前不需要读取模块，暂时注释掉'
                 # readexcel = xlrd.open_workbook(u'基站信息查询'+datetime.now().date().isoformat()+u'号'+str(excelnum)+'.xlsx')
                 #===========================================================
                 break
     else:
-        workbook = xlsxwriter.Workbook(u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+'.xlsx')
+        workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+'.xlsx')
         worksheet1 = workbook.add_worksheet()
         print'333'
-        print u'生成Excel文件为： '+u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+'.xlsx'    
+        print u'生成Excel文件为： '+os.getcwd()+os.sep+'report'+os.sep+u'基站信息修改结果与查询结果对比'+datetime.now().date().isoformat()+'.xlsx'    
       
     
     
