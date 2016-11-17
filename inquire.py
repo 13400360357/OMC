@@ -125,7 +125,8 @@ def inquire(b):
         print '**************************************开始%d项测试**************共%d项*************'%(i,len(list))
         aa=b.find_element_by_xpath(a['select'])
         time.sleep(1)
-        ActionChains(b).move_to_element(aa).double_click().perform()
+#         ActionChains(b).move_to_element(aa).double_click().perform()
+        aa.click()
         time.sleep(1)
         print '本次查询元素为',list[(i-1)]
         pp = b.find_element_by_xpath(list[(i-1)])
