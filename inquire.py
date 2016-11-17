@@ -130,7 +130,8 @@ def inquire(b):
         time.sleep(1)
         print '本次查询元素为',list[(i-1)]
         pp = b.find_element_by_xpath(list[(i-1)])
-        ActionChains(b).move_to_element(pp).double_click().perform()
+#         ActionChains(b).move_to_element(pp).double_click().perform()
+        ActionChains(b).double_click(pp).perform()
         b.find_element_by_xpath(a[('执行').decode('utf-8').encode('gbk')]).click()
         time.sleep(1)
         nline=0
