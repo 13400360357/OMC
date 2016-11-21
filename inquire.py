@@ -253,6 +253,7 @@ def inquire(b):
     print '**************************测试完成，关闭测试！！************************************'
     
 if __name__ == '__main__':
-    b = webdriver.Firefox()
+#     b = webdriver.Chrome()
+    b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
     b = logoin(b)
     inquire(b)
