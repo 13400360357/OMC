@@ -254,6 +254,7 @@ def inquire(b):
     
 if __name__ == '__main__':
 #     b = webdriver.Chrome()
-    b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
+#     b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
+    b=webdriver.PhantomJS(executable_path='/root/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
     b = logoin(b)
     inquire(b)
