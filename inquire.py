@@ -240,21 +240,21 @@ def inquire(b):
     time.sleep(1)
     workbook.close()
 
-    '退出登录'
-    arg=importinfo('logout') 
-    time.sleep(3)
-    logoutbtton = WebDriverWait(b, 10).until(lambda c: b.find_element_by_xpath(arg['smcurl_logouid'])) 
-    ActionChains(b).click(logoutbtton).perform()
-    time.sleep(1)
-    logoutbtton2 =b.find_element_by_xpath(arg['smcurl_logouid2'])
-    ActionChains(b).move_to_element(logoutbtton2).click().perform()
-    print '退出系统登录'
-    
-    print '**************************测试完成，关闭测试！！************************************'
-    
+#     '退出登录'
+#     arg=importinfo('logout') 
+#     time.sleep(3)
+#     logoutbtton = WebDriverWait(b, 10).until(lambda c: b.find_element_by_xpath(arg['smcurl_logouid'])) 
+#     ActionChains(b).click(logoutbtton).perform()
+#     time.sleep(1)
+#     logoutbtton2 =b.find_element_by_xpath(arg['smcurl_logouid2'])
+#     ActionChains(b).move_to_element(logoutbtton2).click().perform()
+#     print '退出系统登录'
+#     
+#     print '**************************测试完成，关闭测试！！************************************'
+#     
 if __name__ == '__main__':
 #     b = webdriver.Chrome()
-#     b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
-    b=webdriver.PhantomJS(executable_path='/root/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
+    b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
+#     b=webdriver.PhantomJS(executable_path='/root/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
     b = logoin(b)
     inquire(b)
