@@ -26,7 +26,8 @@ class inquire():
             aa=self.b.find_element_by_xpath(self.yemianyuansu['select'])
             time.sleep(1)
     #         ActionChains(self.b).move_to_element(aa).double_click().perform()
-            aa.click()
+            ActionChains(b).move_to_element(aa).click().perform()
+#             aa.click()
             time.sleep(1)
             print 'ele is:',list[(i-1)]
             pp = b.find_element_by_xpath(list[(i-1)])
@@ -34,6 +35,8 @@ class inquire():
             self.b.find_element_by_xpath(self.yemianyuansu['zhixing']).click()
             time.sleep(1)
             nline=0
+             
+             
              
             '2).获得1、2行的查询结果，并保存到Excel表格'
             '/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[元素]/div[索引]/div[列]/span[行]'

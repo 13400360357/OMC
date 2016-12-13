@@ -1,0 +1,2 @@
+
+1 ele:(mod a1),1 inputbox,special context,no prompt,failure
