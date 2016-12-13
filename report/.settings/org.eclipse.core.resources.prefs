@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding/basic.py=utf-8
+encoding/compare.py=utf-8
+encoding/readexcel.py=utf-8
 encoding/separate_add.py=utf-8
 encoding/separate_inquire.py=utf-8
 encoding/separate_modify.py=utf-8
