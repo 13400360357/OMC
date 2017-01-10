@@ -195,7 +195,8 @@ if __name__ == '__main__':
     worksheet1.write(0,4,'Task_Progress(failed reason)')
     
     '登录循环'
-    for iii in range(1,3):
+    for iii in range(1,101):
+#     for iii in range(1,3):
         '登录'
         login.run()
          
