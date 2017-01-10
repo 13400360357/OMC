@@ -3,7 +3,6 @@
 @author: MengLei'''
 
 from basic import *
-import re
 
 class upgrade():
     def __init__(self,b,shengjicelue_yemianyuansu,shengji_input):
@@ -102,7 +101,7 @@ class upgrade():
                 except:
                     pass
       
-            if bb == u'已结束':
+            if bb == u'已结束' or bb == 'End':
                 print Task_Results,'upgrade finished...'
                 break
             else:
@@ -115,7 +114,9 @@ class upgrade():
         Upgrade_result=self.b.find_element_by_xpath('//*[@id="datagrid-row-r4-2-%d"]/td[7]/div'%i).text
         Task_Results =  self.b.find_element_by_xpath('//*[@id="datagrid-row-r14-2-%d"]/td[3]/div'%i).text
         
-        if Upgrade_result==u'成功':
+        print Upgrade_result
+        print Task_Results
+        if Upgrade_result==u'成功' or  Upgrade_result == 'upgrade complete':
             print 'upgrade success...'
             pass
         else:
