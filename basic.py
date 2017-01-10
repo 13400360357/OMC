@@ -64,8 +64,8 @@ class opencatalogue:
 
 class CreateExcel:
         
+    '*******************************************************windows系统*******************************************************'
     #===========================================================================
-    # '*******************************************************windows系统*******************************************************'
     # def run(self,filena):
     #     '按当天日期创建excel文件'
     #     nrows = 0
@@ -84,7 +84,7 @@ class CreateExcel:
     #         worksheet1 = workbook.add_worksheet('1')
     #         worksheet2 = workbook.add_worksheet('2')
     #         print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'    
-    #            
+    #             
     #     return workbook,worksheet1,worksheet2
     #     '*******************************************************windows系统*******************************************************'
     #===========================================================================
@@ -100,14 +100,16 @@ class CreateExcel:
                 if not os.path.exists('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
                     workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
                     worksheet1 = workbook.add_worksheet()
+                    worksheet2 = workbook.add_worksheet('2')
                     print 'Create Excel： /home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
                     break
         else:
             workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx')
             worksheet1 = workbook.add_worksheet()
+            worksheet2 = workbook.add_worksheet('2')
             print 'Create Excel：/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx'    
-                   
-        return workbook,worksheet1
+                    
+        return workbook,worksheet1,worksheet2
         '********************************************************Linux系统********************************************************'
 
 class CreateTxt:

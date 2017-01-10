@@ -4,7 +4,6 @@
 
 from basic import *
 import re
-from win32pdhutil import browse
 
 class upgrade():
     def __init__(self,b,shengjicelue_yemianyuansu,shengji_input):
@@ -53,6 +52,7 @@ class upgrade():
                 self.b.find_element_by_xpath('//span[@title="%s"]'%self.shengji_input['mubiaobanben']).click()
             except:
                 pass
+        time.sleep(2)
         self.b.find_element_by_xpath(self.yemianyuansu['wancheng']).click()
          
         '取消升级'
@@ -130,7 +130,7 @@ class upgrade():
         self.b.find_element_by_xpath(self.yemianyuansu['ruanjianxitongshengji']).click()
         time.sleep(1)
         '查找结果'
-        for ii in range(3):
+        for ii in range(10):
             time.sleep(0.5)
             print 'starting check result'
             try:
@@ -189,10 +189,11 @@ if __name__ == '__main__':
     opencatalogue=opencatalogue()
     logout=logout()
     worksheet1.write(0,0,'Upgrade_result')
-    worksheet1.write(0,1,'target version')
-    worksheet1.write(0,2,'start time')
-    worksheet1.write(0,3,'finish time')
-    worksheet1.write(0,4,'Task_Progress(failed reason)')
+    worksheet1.write(0,1,'shengjijizhan')
+    worksheet1.write(0,2,'target version')
+    worksheet1.write(0,3,'start time')
+    worksheet1.write(0,4,'finish time')
+    worksheet1.write(0,5,'Task_Progress(failed reason)')
     
     '登录循环'
     for iii in range(1,101):
@@ -223,17 +224,19 @@ if __name__ == '__main__':
         '第一次升级'
         if iii % 2:
             up.selectversion_new()
-            worksheet1.write(iii,1,shengji_input['mubiaobanben_new'])
+            worksheet1.write(iii,2,shengji_input['mubiaobanben_new'])
         else:
             up.selectversion_old()
-            worksheet1.write(iii,1,shengji_input['mubiaobanben_old'])
+            worksheet1.write(iii,2,shengji_input['mubiaobanben_old'])
+            
             
         '记录起始时间+执行结果'
-        worksheet1.write(iii,2,time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())))
+        worksheet1.write(iii,1,shengji_input['jizhanliebiao'])
+        worksheet1.write(iii,3,time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())))
         Upgrade_result,Task_Results = up.checkresult()
         worksheet1.write(iii,0,Upgrade_result)
-        worksheet1.write(iii,3,time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())))
-        worksheet1.write(iii,4,Task_Results)
+        worksheet1.write(iii,4,time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())))
+        worksheet1.write(iii,5,Task_Results)
         
         '删除结果'
         up.delete()
