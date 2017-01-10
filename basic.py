@@ -57,158 +57,184 @@ class opencatalogue:
             time.sleep(1)
             ActionChains(b).move_to_element(yemianyuansu).click().perform()
             time.sleep(1)
+            print  catalogue_xpath
+            print  son_catalogue_xpath
             logoutbtton = WebDriverWait(b, 3).until(lambda c: b.find_element_by_xpath(son_catalogue_xpath)) 
             logoutbtton.click()
 
 class CreateExcel:
         
-    #===========================================================================
-    # '*******************************************************windows系统*******************************************************'
-    # def run(self,filena):
-    #     '按当天日期创建excel文件'
-    #     nrows = 0
-    #     if  os.path.exists(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'):
-    #         excelnum=0
-    #         while 1:
-    #             excelnum +=1
-    #             if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
-    #                 workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
-    #                 worksheet1 = workbook.add_worksheet()
-    #                 print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
-    #                 break
-    #     else:
-    #         workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx')
-    #         worksheet1 = workbook.add_worksheet()
-    #         print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'    
-    #           
-    #     return workbook,worksheet1
-    #     '*******************************************************windows系统*******************************************************'
-    #===========================================================================
-          
-    '********************************************************Linux系统********************************************************'
+    '*******************************************************windows系统*******************************************************'
     def run(self,filena):
         '按当天日期创建excel文件'
         nrows = 0
-        if  os.path.exists('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx'):
+        if  os.path.exists(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'):
             excelnum=0
             while 1:
                 excelnum +=1
-                if not os.path.exists('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
-                    workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
-                    worksheet1 = workbook.add_worksheet()
-                    print 'Create Excel： /home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
+                if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
+                    workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
+                    worksheet1 = workbook.add_worksheet('1')
+                    worksheet2 = workbook.add_worksheet('2')
+                    print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
                     break
         else:
-            workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx')
-            worksheet1 = workbook.add_worksheet()
-            print 'Create Excel：/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx'    
-                  
-        return workbook,worksheet1
-        '********************************************************Linux系统********************************************************'
-
-class CreateTxt:
-    
+            workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx')
+            worksheet1 = workbook.add_worksheet('1')
+            worksheet2 = workbook.add_worksheet('2')
+            print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'    
+               
+        return workbook,worksheet1,worksheet2
+        '*******************************************************windows系统*******************************************************'
+          
     #===========================================================================
-    # '*******************************************************windows系统*******************************************************'    
+    # '********************************************************Linux系统********************************************************'
     # def run(self,filena):
-    #     '4.按当天日期创建txt文件'
-    #     if  os.path.exists(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt'):
+    #     '按当天日期创建excel文件'
+    #     nrows = 0
+    #     if  os.path.exists('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx'):
     #         excelnum=0
     #         while 1:
     #             excelnum +=1
-    #             if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'):
-    #                 txt = open(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt','a')
-    #                 print 'Create txt： '+os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'
+    #             if not os.path.exists('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
+    #                 workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
+    #                 worksheet1 = workbook.add_worksheet()
+    #                 print 'Create Excel： /home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
     #                 break
     #     else:
-    #         txt = open(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt','a')
-    #         print 'Create txt： '+os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt'
-    #     return txt
-    #     '*******************************************************windows系统*******************************************************'
+    #         workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx')
+    #         worksheet1 = workbook.add_worksheet()
+    #         print 'Create Excel：/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx'    
+    #               
+    #     return workbook,worksheet1
+    #     '********************************************************Linux系统********************************************************'
     #===========================================================================
+
+class CreateTxt:
     
-    '*******************************************5*************Linux系统********************************************************'
+    '*******************************************************windows系统*******************************************************'    
     def run(self,filena):
         '4.按当天日期创建txt文件'
-        if  os.path.exists('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt'):
+        if  os.path.exists(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt'):
             excelnum=0
             while 1:
                 excelnum +=1
-                if not os.path.exists('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'):
-                    txt = open('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt','a')
-                    print 'Create txt:/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'
+                if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'):
+                    txt = open(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt','a')
+                    print 'Create txt： '+os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'
                     break
         else:
-            txt = open('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt','a')
-            print 'Create txt:/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt'
+            txt = open(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt','a')
+            print 'Create txt： '+os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt'
         return txt
-        '********************************************************Linux系统********************************************************'
-
-class login:
-    def __init__(self):
-#         self.b = webdriver.Chrome()
-        self.b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/env/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
+        '*******************************************************windows系统*******************************************************'
+    
+    #===========================================================================
+    # '*******************************************5*************Linux系统********************************************************'
+    # def run(self,filena):
+    #     '4.按当天日期创建txt文件'
+    #     if  os.path.exists('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt'):
+    #         excelnum=0
+    #         while 1:
+    #             excelnum +=1
+    #             if not os.path.exists('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'):
+    #                 txt = open('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt','a')
+    #                 print 'Create txt:/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'
+    #                 break
+    #     else:
+    #         txt = open('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt','a')
+    #         print 'Create txt:/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt'
+    #     return txt
+    #     '********************************************************Linux系统********************************************************'
+    #===========================================================================
+class browser:
+    def run(self):
+        b = webdriver.Chrome()
+#         self.b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/env/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
 #         self.b=webdriver.PhantomJS(executable_path=r'D:\phantomjs\bin\phantomjs.exe')
         
-        self.b.set_window_size(1920, 1080)
+#         self.b.set_window_size(1920, 1080)
+        time.sleep(2)
+        b.maximize_window()
+        return b
+    
+
+
+class login:
+    def __init__(self,b):
+        self.b = b
 
     def run(self):
-        b=self.b
-        time.sleep(1)
-        b.maximize_window()
         im=importinfo()
         inquire=im.run('web_ele.ini','login')
-        b.get(inquire['url'])
-        d=WebDriverWait(b, 10).until(lambda c:b.find_element_by_xpath(inquire['smcurl_userid']))
+        self.b.get(inquire['url'])
+        d=WebDriverWait(self.b, 10).until(lambda c:self.b.find_element_by_xpath(inquire['smcurl_userid']))
         d.clear()
         d.send_keys(inquire['username'])
         time.sleep(0.5)
-        e=b.find_element_by_xpath(inquire['smcurl_pwdid'])
+        e=self.b.find_element_by_xpath(inquire['smcurl_pwdid'])
         e.clear()
         e.send_keys(inquire['userpassword'])
-        b.find_element_by_xpath(inquire['smcurl_loginid']).click()
-        return b
-
-class prepare:
-    def login(self):
-        c=login()
-        b=c.run()
-        return b
-
-    def opencatalogue(self,b,txt, sections, catalogue_option, son_catalogue_option):
-        '2.2 打开左侧目录'
-        open=opencatalogue()
-        ini,catalogue_xpath,son_catalogue_xpath=open.importinfo(txt,sections,catalogue_option,son_catalogue_option)
-        open.run(b,catalogue_xpath,son_catalogue_xpath)
         time.sleep(0.5)
-        return ini
+        self.b.find_element_by_xpath(inquire['smcurl_loginid']).click()
+        return self.b
+
+class logout:
+    def run(self,b):
+        im=importinfo()
+        logout=im.run('web_ele.ini','logout')
+        b.find_element_by_xpath(logout['admin']).click()
+        time.sleep(0.5)
+        b.find_element_by_xpath(logout['logout']).click()
         
-    def import_yemianyuansu(self,b,ini):
-        '3.1 导入基站'
-        yemianyuansu=ini.run('web_ele.ini','yemianyuansu')
-        return yemianyuansu
-    
-    def select_enb(self,b,yemianyuansu):
-        '3.2 选定，执行'
-        time.sleep(1)
-        ddd =WebDriverWait(b,20).until(lambda x: b.find_element_by_xpath(yemianyuansu['chaxunshuru']))
-        ddd.send_keys(yemianyuansu['jizhan_kuandai'])
-        time.sleep(1)
-        b.find_element_by_xpath(yemianyuansu['chaxunanniu']).click()
-        time.sleep(1)
-        b.find_element_by_xpath(yemianyuansu['xuandinganniu']).click()
-                 
-    def excel(self,filena):
-        '4. 创建Excel'
-        excel=CreateExcel()
-        workbook,worksheet1=excel.run(filena)
-        return workbook,worksheet1
-    
-    def txt(self,filena):
-        createtxt=CreateTxt()
-        txt=createtxt.run(filena)
-        return txt
- 
+
+
+# class prepare:
+#     def login(self):
+#         br=browser()
+#         b=br.run
+#         c=login(b)
+#         b=c.run()
+#         return b
+# 
+#     def opencatalogue(self,b,txt, sections, catalogue_option, son_catalogue_option):
+#         '2.2 打开左侧目录'
+#         open=opencatalogue()
+#         ini,catalogue_xpath,son_catalogue_xpath=open.importinfo(txt,sections,catalogue_option,son_catalogue_option)
+#         open.run(b,catalogue_xpath,son_catalogue_xpath)
+#         time.sleep(0.5)
+#         return ini
+#         
+# #     def import_yemianyuansu(self,b,ini):
+# #         '3.1 导入基站'
+# #         yemianyuansu=ini.run('web_ele.ini','yemianyuansu')
+# #         return yemianyuansu
+#     def import_yemianyuansu(self,b,ini,section):
+#         '3.1 导入基站'
+#         yemianyuansu=ini.run('web_ele.ini',section)
+#         return yemianyuansu
+#     
+#     def select_enb(self,b,yemianyuansu):
+#         '3.2 选定，执行'
+#         time.sleep(1)
+#         ddd =WebDriverWait(b,20).until(lambda x: b.find_element_by_xpath(yemianyuansu['chaxunshuru']))
+#         ddd.send_keys(yemianyuansu['jizhan_kuandai'])
+#         time.sleep(1)
+#         b.find_element_by_xpath(yemianyuansu['chaxunanniu']).click()
+#         time.sleep(1)
+#         b.find_element_by_xpath(yemianyuansu['xuandinganniu']).click()
+#                  
+#     def excel(self,filena):
+#         '4. 创建Excel'
+#         excel=CreateExcel()
+#         workbook,worksheet1,worksheet2=excel.run(filena)
+#         return workbook,worksheet1,worksheet2
+#     
+#     def txt(self,filena):
+#         createtxt=CreateTxt()
+#         txt=createtxt.run(filena)
+#         return txt
+#  
 class compare:
     def run(self,excel1,excel2):
         '1. 创建Excel'

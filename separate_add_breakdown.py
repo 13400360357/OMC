@@ -10,13 +10,13 @@ from basic import *
 
 
 class omc_add:
-#     def __init__(self,b,yemianyuansu,modifyobjectelepath,modifyobjectxpath,txt,workbook,worksheet1):
+#     def __init__(self,b,yemianyuansu,modifyobjectelepath,modifyobjectxpath,txt,workbook,worksheet2):
 #         self.b=b
 #         self.yemianyuansu=yemianyuansu
 #         self.modifyobjectelepath=modifyobjectelepath
 #         self.modifyobjectxpath=modifyobjectxpath
 #         self.workbook=workbook
-#         self.worksheet1=worksheet1  
+#         self.worksheet2=worksheet2  
 #         self.txt=txt
 #         
         
@@ -309,7 +309,7 @@ if __name__ == '__main__':
     ini=session.opencatalogue('web_ele.ini','zuocemulu', 'jizhan', 'jizhan_peizhi')
     yemianyuansu=session.import_yemianyuansu(b, ini)
     session.select_enb(yemianyuansu)
-    workbook,worksheet1=session.excel()
+    workbook,worksheet2=session.excel()
 
     session2=omc_add()
     session2.run(ini,'web_ele.ini','inquire')

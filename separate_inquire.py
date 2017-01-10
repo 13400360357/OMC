@@ -6,32 +6,35 @@ from basic import *
 
 
 class inquire():
-    def __init__(self,b,yemianyuansu,workbook,worksheet1):
+    def __init__(self,b,yemianyuansu,workbook,worksheet1,worksheet2):
         self.b=b
         self.yemianyuansu=yemianyuansu
         self.workbook=workbook
         self.worksheet1=worksheet1
+        self.worksheet2=worksheet2
 
     def run(self,ini,text,sections):
         '1. 导入要查询的元素'
-        items=ini.run(text,sections)
-        list=(items.values())
-        
+        list=ini.run(text,sections)
+
         '2. 循环打开下拉列表，选择各个元素，并保存查询结果'
         nrows = 0
-        for i in range(1,len(list)+1):
-#         for i in range(1,2):
+#         for i in range(1,len(list)+1):
+        for i in range(1,3):
+            sepacial_flag =0
+
             '1).打开下拉列表，选择查找元素，并点击执行'
-            print '***************************start testing...      total %d      this is %d*******************************'%(i,len(list))
+            print '***************************start testing...      total %d      this is %d*******************************'%(i,len(list)),list['%d'%i]
+            print self.yemianyuansu['select']
             aa=self.b.find_element_by_xpath(self.yemianyuansu['select'])
+            ActionChains(self.b).move_to_element(aa).double_click().perform()
             time.sleep(1)
-    #         ActionChains(self.b).move_to_element(aa).double_click().perform()
-            ActionChains(b).move_to_element(aa).click().perform()
-#             aa.click()
+             
+            print 'ele is:',list['%d'%i]
+            pp =self.b.find_element_by_xpath('//div[contains(text(),"%s")]'%list['%d'%i])
             time.sleep(1)
-            print 'ele is:',list[(i-1)]
-            pp = b.find_element_by_xpath(list[(i-1)])
-            ActionChains(self.b).double_click(pp).perform()
+#             ActionChains(self.b).double_click(pp).perform()
+            ActionChains(b).move_to_element(pp).double_click().perform()
             self.b.find_element_by_xpath(self.yemianyuansu['zhixing']).click()
             time.sleep(1)
             nline=0
@@ -45,10 +48,10 @@ class inquire():
                 f='/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[%d]/span[%d]'%(i,m)
                 try:
                     g=WebDriverWait(self.b,300).until(lambda x: self.b.find_element_by_xpath(f)).text
-                    self.worksheet1.write(nrows,0,g)
+                    self.worksheet2.write(nrows,0,g)
                     nrows+=1
                 except:
-                    self.worksheet1.write(nrows, 0,'等待结果超时，本元素终止查询')
+                    self.worksheet2.write(nrows, 0,'等待结果超时，本元素终止查询')
                     nrows+=1
                     '等待结果超时，本项查询终止，进行下一项查询！'
                     print 'time out... end this ele . starting the next ele'
@@ -112,24 +115,31 @@ class inquire():
                         'm为：%d，查询元素的具体xpath为： %s'%(iii,f)
                         try:
                             g = self.b.find_element_by_xpath(fff).text
-                            self.worksheet1.write(nrows,n-1,g)
+                            self.worksheet2.write(nrows,n-1,g)
                         except:
                              
                             '2.获取第3和第4行的异常结果获取,，写入excel'
                             if ii==1 and iii==1 and n ==1:
                                 'iii==1(第三行) and n ==1（第一列）'
-                                f='/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[%d]/span[3]'%(i)
+                                f='//*[@id="showParamValues"]/div[%d]/span[3]'%(i)
+                                try:
+                                    g = b.find_element_by_xpath(f).text
+                                    worksheet2.write(nrows,n-1,g)
+                                    sepacial_flag+=1
+                                except:
+                                    pass                                
                             elif  ii==1 and iii==2 and n==1:
                                 'iii==2（第四行） and n==1（第一列）'
-                                f='/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[%d]/span[4]'%(i)
+                                f='//*[@id="showParamValues"]/div[%d]/span[4]'%(i)
+                                try:
+                                    g = b.find_element_by_xpath(f).text
+                                    worksheet2.write(nrows,n-1,g)
+                                    sepacial_flag+=1
+                                except:
+                                    pass                                
                             else:
-                                f=''
-                            try:
-                                g = self.b.find_element_by_xpath(f).text
-                                self.worksheet1.write(nrows,n-1,g)
-                            except:
-                                break
-         
+                                pass
+                            
                     nrows+=1
                     time.sleep(0.2)
                     '一行内容填写完成'
@@ -137,24 +147,68 @@ class inquire():
                              
             time.sleep(1)
             '第%d项测试已全部保存'%(i)
-            print 'the testing of %d ele is finished,starting the next ele'%(i)        
-         
+            
+            if sepacial_flag==0:
+                self.worksheet1.write(i-1,0,'%s pass.'%list['%d'%i])
+            else:
+                self.worksheet1.write(i-1,0,'%s failed : %s'%(list['%d'%i],g))
+                
+            print 'start the next...'
+                
         time.sleep(1)
         self.workbook.close()
         print '***************************test finished!   close workbook...'
 
 if __name__ == '__main__':
-    session=prepare()
-    b=session.login()
+    '各种实例化'
+    browser=browser()
+    excel=CreateExcel()
+    ini=importinfo()
+    opencatalogue=opencatalogue()
+    
+    '登录'
+    b=browser.run()
+    login=login(b)
+    login.run()
+    workbook,worksheet1,worksheet2=excel.run('inquire')
+    
     try:
         b.find_element_by_xpath('/html/body/div[39]/div[3]/a/span/span').click()
     except:
         pass
     
-    ini=session.opencatalogue(b,'web_ele.ini','zuocemulu', 'jizhan', 'jizhan_peizhi')
-    yemianyuansu=session.import_yemianyuansu(b, ini)
-    session.select_enb(b,yemianyuansu)
-    workbook,worksheet1=session.excel('inquire')
-
-    session2=inquire(b, yemianyuansu,workbook, worksheet1)
+    '导入左侧目录xpath'
+    zuocemulu_xpath=ini.run('web_ele.ini','zuocemulu')
+    time.sleep(0.5)
+    catalogue_xpath=zuocemulu_xpath.pop('jizhan')
+    son_catalogue_xpath=zuocemulu_xpath.pop('jizhan_peizhi')    
+    
+    '打开左侧目录'
+    time.sleep(0.5)
+    opencatalogue.run(b,catalogue_xpath,son_catalogue_xpath)
+    time.sleep(0.5)
+    yemianyuansu=ini.run('web_ele.ini', 'yemianyuansu')
+    
+    '选定基站执行'
+    time.sleep(1)
+    ddd =WebDriverWait(b,20).until(lambda x: b.find_element_by_xpath(yemianyuansu['chaxunshuru']))
+    ddd.send_keys(yemianyuansu['jizhan_kuandai'])
+    time.sleep(1)
+    b.find_element_by_xpath(yemianyuansu['chaxunanniu']).click()
+    time.sleep(1)
+    b.find_element_by_xpath(yemianyuansu['xuandinganniu']).click()
+    
+    '开始查询，并保存结果'
+    session2=inquire(b, yemianyuansu,workbook, worksheet1,worksheet2)
     session2.run(ini,'web_ele.ini','chaxun')
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

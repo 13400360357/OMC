@@ -71,10 +71,12 @@ def omc_add(b):
         print '******************************************************************************这是第%d个元素，一共%d个。'%(e,len(dict))
         print '本次查询/增/删项目为:',dict['%d'%e]
         print '开始第一次查询，获得初始结果'
-        if dict['%d'%e]!="LST IPSEC":
+        if dict['%d'%e]!="LST IPSEC_ENABLE":
+            print '1'
     #       round_modifyobjectxpath = b.find_element_by_xpath('//div[contains(text(),"LST CELL")]')
             round_modifyobjectxpath = b.find_element_by_xpath('//div[contains(text(),"%s")]'%dict['%d'%e]) 
         else:
+            print '12'
             round_modifyobjectxpath = b.find_element_by_xpath('//div[contains(text(),"%s ")]'%dict['%d'%e])             
         ActionChains(b).move_to_element(round_modifyobjectxpath).double_click().perform()
         b.find_element_by_link_text('执行').click()
@@ -328,7 +330,7 @@ def omc_add(b):
 
     
 if __name__ == '__main__':
-    b=webdriver.Firefox()
+    b=webdriver.Chrome()
     b.get('http://192.168.9.32:8080/smallcell/')
     b.maximize_window()
     omc_add(b)
