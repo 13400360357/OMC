@@ -117,14 +117,14 @@ class upgrade():
         Upgrade_result=self.b.find_element_by_xpath('//*[@id="datagrid-row-r4-2-%d"]/td[7]/div'%i).text
         time.sleep(0.2)
         Task_Results =  self.b.find_element_by_xpath('//*[@id="datagrid-row-r14-2-%d"]/td[3]/div'%i).text
-        
-        print Upgrade_result
-        print Task_Results
+#         
+        print Upgrade_result.encode('utf-8')
+        print Task_Results.encode('utf-8')
         if Upgrade_result==u'成功' or  Upgrade_result == 'upgrade complete':
             print 'upgrade success...'
             pass
         else:
-            print 'upgrade failed,resean:',Upgrade_result
+            print 'upgrade failed,resean:',Upgrade_result.encode('utf-8')
         time.sleep(1)
         
         return Upgrade_result,Task_Results
