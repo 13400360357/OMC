@@ -152,8 +152,8 @@ class CreateTxt:
 class browser:
     def run(self):
 #         self.b = webdriver.Chrome()
-        self.b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/env/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
-#         self.b=webdriver.PhantomJS(executable_path=r'D:\phantomjs\bin\phantomjs.exe')
+#         self.b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/env/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
+        self.b=webdriver.PhantomJS(executable_path=r'D:\phantomjs\bin\phantomjs.exe')
         
         self.b.set_window_size(1920, 1080)
         time.sleep(2)
