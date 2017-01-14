@@ -85,7 +85,7 @@ class CreateExcel:
             worksheet2 = workbook.add_worksheet('2')
             excel_path=os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx' 
             print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'    
-                 
+        print 'excel_path',excel_path
         return workbook,worksheet1,worksheet2,excel_path
         '*******************************************************windows系统*******************************************************'
           
