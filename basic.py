@@ -65,97 +65,97 @@ class opencatalogue:
 class CreateExcel:
         
     '*******************************************************windows系统*******************************************************'
-    #===========================================================================
-    # def run(self,filena):
-    #     '按当天日期创建excel文件'
-    #     nrows = 0
-    #     if  os.path.exists(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'):
-    #         excelnum=0
-    #         while 1:
-    #             excelnum +=1
-    #             if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
-    #                 workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
-    #                 worksheet1 = workbook.add_worksheet('1')
-    #                 worksheet2 = workbook.add_worksheet('2')
-    #                 print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
-    #                 break
-    #     else:
-    #         workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx')
-    #         worksheet1 = workbook.add_worksheet('1')
-    #         worksheet2 = workbook.add_worksheet('2')
-    #         print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'    
-    #             
-    #     return workbook,worksheet1,worksheet2
-    #     '*******************************************************windows系统*******************************************************'
-    #===========================================================================
-          
-    '********************************************************Linux系统********************************************************'
     def run(self,filena):
         '按当天日期创建excel文件'
         nrows = 0
-        if  os.path.exists('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx'):
+        if  os.path.exists(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'):
             excelnum=0
             while 1:
                 excelnum +=1
-                if not os.path.exists('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
-                    workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
-                    worksheet1 = workbook.add_worksheet()
+                if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
+                    workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
+                    worksheet1 = workbook.add_worksheet('1')
                     worksheet2 = workbook.add_worksheet('2')
-                    print 'Create Excel： /home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
+                    print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
+                    excel_path=os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
                     break
         else:
-            workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx')
-            worksheet1 = workbook.add_worksheet()
+            workbook = xlsxwriter.Workbook(os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx')
+            worksheet1 = workbook.add_worksheet('1')
             worksheet2 = workbook.add_worksheet('2')
-            print 'Create Excel：/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx'    
-                    
-        return workbook,worksheet1,worksheet2
-        '********************************************************Linux系统********************************************************'
+            excel_path=os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx' 
+            print 'Create Excel： '+os.getcwd()+os.sep+'report'+os.sep+filena+datetime.now().date().isoformat()+'.xlsx'    
+                 
+        return workbook,worksheet1,worksheet2,excel_path
+        '*******************************************************windows系统*******************************************************'
+          
+#     '********************************************************Linux系统********************************************************'
+#     def run(self,filena):
+#         '按当天日期创建excel文件'
+#         nrows = 0
+#         if  os.path.exists('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx'):
+#             excelnum=0
+#             while 1:
+#                 excelnum +=1
+#                 if not os.path.exists('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'):
+#                     workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx')
+#                     worksheet1 = workbook.add_worksheet()
+#                     worksheet2 = workbook.add_worksheet('2')
+#                     print 'Create Excel： /home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.xlsx'
+#                     break
+#         else:
+#             workbook = xlsxwriter.Workbook('/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx')
+#             worksheet1 = workbook.add_worksheet()
+#             worksheet2 = workbook.add_worksheet('2')
+#             print 'Create Excel：/home/meng/workspace/OMC/report/'+filena+datetime.now().date().isoformat()+'.xlsx'    
+#                     
+#         return workbook,worksheet1,worksheet2
+#         '********************************************************Linux系统********************************************************'
 
 class CreateTxt:
     
-    #===========================================================================
-    # '*******************************************************windows系统*******************************************************'    
-    # def run(self,filena):
-    #     '4.按当天日期创建txt文件'
-    #     if  os.path.exists(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt'):
-    #         excelnum=0
-    #         while 1:
-    #             excelnum +=1
-    #             if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'):
-    #                 txt = open(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt','a')
-    #                 print 'Create txt： '+os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'
-    #                 break
-    #     else:
-    #         txt = open(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt','a')
-    #         print 'Create txt： '+os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt'
-    #     return txt
-    #     '*******************************************************windows系统*******************************************************'
-    #===========================================================================
-    
-    '*******************************************5*************Linux系统********************************************************'
+    '*******************************************************windows系统*******************************************************'    
     def run(self,filena):
         '4.按当天日期创建txt文件'
-        if  os.path.exists('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt'):
+        if  os.path.exists(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt'):
             excelnum=0
             while 1:
                 excelnum +=1
-                if not os.path.exists('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'):
-                    txt = open('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt','a')
-                    print 'Create txt:/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'
+                if not os.path.exists(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'):
+                    txt = open(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt','a')
+                    print 'Create txt： '+os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'
                     break
         else:
-            txt = open('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt','a')
-            print 'Create txt:/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt'
+            txt = open(os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt','a')
+            print 'Create txt： '+os.getcwd()+os.sep+'report'+os.sep+'err-'+filena+datetime.now().date().isoformat()+'.txt'
         return txt
-        '********************************************************Linux系统********************************************************'
+        '*******************************************************windows系统*******************************************************'
+    
+    #===========================================================================
+    # '*******************************************5*************Linux系统********************************************************'
+    # def run(self,filena):
+    #     '4.按当天日期创建txt文件'
+    #     if  os.path.exists('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt'):
+    #         excelnum=0
+    #         while 1:
+    #             excelnum +=1
+    #             if not os.path.exists('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'):
+    #                 txt = open('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt','a')
+    #                 print 'Create txt:/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'-'+str(excelnum)+'.txt'
+    #                 break
+    #     else:
+    #         txt = open('/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt','a')
+    #         print 'Create txt:/home/meng/workspace/OMC/report/err-'+filena+datetime.now().date().isoformat()+'.txt'
+    #     return txt
+    #     '********************************************************Linux系统********************************************************'
+    #===========================================================================
 class browser:
     def run(self):
-#         self.b = webdriver.Chrome()
-        self.b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/env/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
+        self.b = webdriver.Chrome()
+#         self.b=webdriver.PhantomJS(executable_path='/home/meng/Downloads/env/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
 #         self.b=webdriver.PhantomJS(executable_path=r'D:\phantomjs\bin\phantomjs.exe')
         
-        self.b.set_window_size(1920, 1080)
+#         self.b.set_window_size(1920, 1080)
         time.sleep(2)
         self.b.maximize_window()
         return self.b

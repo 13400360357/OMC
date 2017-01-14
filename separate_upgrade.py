@@ -3,6 +3,8 @@
 @author: MengLei'''
 
 from basic import *
+from mail_smtp import mail
+from excel_column_perspective import excel_perspective
 
 class upgrade():
     def __init__(self,b,shengjicelue_yemianyuansu,shengji_input):
@@ -112,6 +114,7 @@ class upgrade():
         '判断升级是否成功'
         time.sleep(1)
         Upgrade_result=self.b.find_element_by_xpath('//*[@id="datagrid-row-r4-2-%d"]/td[7]/div'%i).text
+        time.sleep(0.2)
         Task_Results =  self.b.find_element_by_xpath('//*[@id="datagrid-row-r14-2-%d"]/td[3]/div'%i).text
         
         print Upgrade_result
@@ -186,7 +189,7 @@ if __name__ == '__main__':
     login=login(b)
     excel=CreateExcel()
     ini=importinfo()
-    workbook,worksheet1,worksheet2=excel.run('upgrade')
+    workbook,worksheet1,worksheet2,excel_path=excel.run('upgrade')
     opencatalogue=opencatalogue()
     logout=logout()
     worksheet1.write(0,0,'Upgrade_result')
@@ -197,8 +200,8 @@ if __name__ == '__main__':
     worksheet1.write(0,5,'Task_Progress(failed reason)')
     
     '登录循环'
-    for iii in range(1,101):
-#     for iii in range(1,3):
+#     for iii in range(1,101):
+    for iii in range(1,2):
         '登录'
         login.run()
          
@@ -244,8 +247,22 @@ if __name__ == '__main__':
          
         '退出登录'
         logout.run(b)
+        time.sleep(60)
         
         
     workbook.close()
-    '增加开始时间'
+    print 'over...'
+    
+    excel_perspective=excel_perspective()
+    excel_perspective.run(excel_path)
+    
+    mail=mail()
+#     mail.fasong(r'%s'%str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+    '打印一下Excel文件的具体名称'
+    print str(excel_path.split(os.sep)[-1:]).split('\'')[1]
+    mail.fasong(r'%s'%(os.getcwd()+os.sep+str(excel_path.split(os.sep)[-1:]).split('\'')[1]))
+    
+        
+    
+    
     

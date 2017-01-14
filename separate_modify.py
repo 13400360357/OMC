@@ -3,6 +3,8 @@
 @author: MengLei'''
 
 from basic import *
+from mail_smtp import mail
+from excel_column_perspective import excel_perspective
 
 class modify:
     def run(self,b,yemianyuansu,workbook,worksheet1,worksheet2,txt,input_txt):
@@ -19,8 +21,8 @@ class modify:
         nline=0
         commad_success_flag = 1
         'commad_success_flag是判断点击执行后，是否成功下发。'
-        for round in range(1,len(modifyobject)+1):
-#         for round in range(1,3):
+#         for round in range(1,len(modifyobject)+1):
+        for round in range(1,3):
             sepacial_flag=0
             select=b.find_element_by_xpath(yemianyuansu['select'])
             ActionChains(b).move_to_element(select).click().perform()
@@ -29,6 +31,7 @@ class modify:
             
             round_modify =b.find_element_by_xpath('//div[contains(text(),"%s")]'%modifyobject['%d'%round])
             time.sleep(1)
+            time.sleep(0.5)
             ActionChains(b).move_to_element(round_modify).double_click().perform()
             time.sleep(0.5) 
 
@@ -204,6 +207,10 @@ class modify:
             b.find_element_by_xpath(yemianyuansu['zhixing']).click()
             time.sleep(1)
             
+            '写入开始时间'
+            worksheet1.write(round,3,time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())))
+            
+            
             '4.1判断是否有弹窗'
             try:
                 b.find_element_by_xpath('/html/body/div[60]/div[3]/a/span/span').click()
@@ -211,7 +218,7 @@ class modify:
                 print 'max value, click on execute, pop-up window, failure.'
             except:
                 pass
-              
+            
             '4.2最大值，点击执行后，命令是否下发成功'
             try:
                 WebDriverWait(b,300).until(lambda x: b.find_element_by_xpath('//*[@id="showParamValues"]/div[%d]/div'%(commad_success_flag)))
@@ -221,7 +228,10 @@ class modify:
             except:
                 print 'max value, after execute, no result, failure.'%(round)    
                 txt.write('\n %d ele:%s, max value, after execute, no result, failure.'%(round,modifyobject['%d'%round]))
-            
+            finally:
+                '写入具体完成时间'
+                worksheet1.write(round,4,time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())))
+
             '5.读取执行结果，并写入Excel文件'
             '5.1读取前两行结果'
             for m in range(1,3):
@@ -310,9 +320,13 @@ class modify:
                 print '%d line writting into Excel.'%(2+iii)
             
             if sepacial_flag==0:
-                worksheet1.write(round-1,0,'%s pass.'%(modifyobject['%d'%round]))
+                worksheet1.write(round,0,'pass')
             else:
-                worksheet1.write(round-1,0,'%s failed : %s'%(modifyobject['%d'%round],g))
+                worksheet1.write(round,0,'failed')
+            '写入基站名称'
+            worksheet1.write(round,1,yemianyuansu['jizhan_kuandai'])
+            '写入具体查询元素'
+            worksheet1.write(round,2,modifyobject['%d'%round])
             print 'start the next...'
             
         time.sleep(1)
@@ -332,7 +346,12 @@ if __name__ == '__main__':
     b=browser.run()
     login=login(b)
     login.run()
-    workbook,worksheet1,worksheet2=excel.run('modify')
+    workbook,worksheet1,worksheet2,excel_path=excel.run('modify')
+    worksheet1.write(0,0,'Upgrade_result')
+    worksheet1.write(0,1,'jijizhan')
+    worksheet1.write(0,2,'LST_parameter')
+    worksheet1.write(0,3,'start time')
+    worksheet1.write(0,4,'finish time')    
     txt=Txt.run('modify')
     
     try:
@@ -365,5 +384,17 @@ if __name__ == '__main__':
     session2=modify()
     session2.run(b,yemianyuansu,workbook,worksheet1,worksheet2,txt,'web_input.ini')    
     
+    excel_perspective=excel_perspective()
+    excel_perspective.run(excel_path)
+    
+    mail=mail()
+#     mail.fasong(r'%s'%str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+    '打印一下Excel文件的具体名称'
+    print str(excel_path.split(os.sep)[-1:]).split('\'')[1]
+    mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+    
+    
+    
+        
     
     

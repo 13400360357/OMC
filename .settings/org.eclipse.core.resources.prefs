@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//Old/add.py=utf-8
 encoding/basic.py=utf-8
+encoding/excel_column_perspective.py=utf-8
+encoding/mail_smtp.py=utf-8
 encoding/separate_add_breakdown.py=utf-8
 encoding/separate_inquire.py=utf-8
 encoding/separate_modify.py=utf-8
