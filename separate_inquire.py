@@ -26,7 +26,6 @@ class inquire():
 
             '1).打开下拉列表，选择查找元素，并点击执行'
             print '***************************start testing...      total %d      this is %d*******************************'%(i,len(list)),list['%d'%i]
-            print self.yemianyuansu['select']
             self.b.find_element_by_xpath(self.yemianyuansu['select']).click()
             time.sleep(1)
             
@@ -36,7 +35,6 @@ class inquire():
             # print 'screenshot.png over...'            
             #===================================================================
             
-            print 'ele is:',list['%d'%i]
             pp =self.b.find_element_by_xpath('//div[contains(text(),"%s")]'%list['%d'%i])
             time.sleep(1)
             ActionChains(self.b).move_to_element(pp).double_click().perform()
@@ -92,7 +90,7 @@ class inquire():
                         break
                     else:
                         nline=1
-            print '查询结果一共包含%d个索引'%(nline)
+            '查询结果一共包含%d个索引'%(nline)
                         
             '(2).判断索引有几列*******************'
             all_col=[]
@@ -109,7 +107,7 @@ class inquire():
                         '没有返回正确结果，强制定为只有1列'
 #                         print 'failed result. all_col must=1 all_col.append('')'
                         all_col.append('')
-            print 'all_col有%d列,具体元素为：'%(len(all_col)),all_col
+            'all_col有%d列,具体元素为：'%(len(all_col)),all_col
             
             '(3).获取内容导出到Excel*******************'
             '''i项目，ii,nline索引，iii行数（共2行）,n列数  '''
@@ -228,7 +226,7 @@ if __name__ == '__main__':
     '邮件发送'
     mail=mail()
     '打印一下Excel文件的具体路径+名称'
-    print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+#     print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
     mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
     
     

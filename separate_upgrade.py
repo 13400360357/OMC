@@ -104,10 +104,10 @@ class upgrade():
                     pass
       
             if bb == u'已结束' or bb == 'End':
-                print Task_Results,'upgrade finished...'
+                print Task_Results.decode('utf-8'),'upgrade finished...'
                 break
             else:
-                print Task_Results
+                print Task_Results.decode('utf-8')
                 time.sleep(20)
                 
                  
@@ -258,7 +258,7 @@ if __name__ == '__main__':
     
     mail=mail()
     '打印一下Excel文件的具体名称'
-    print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+#     print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
     mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])        
     
     

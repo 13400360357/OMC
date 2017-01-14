@@ -11,7 +11,7 @@ class modify:
         '1 导入元素'
         modify_imp=importinfo()
         modifyobject=modify_imp.run('web_ele.ini','xiugai')
-        print modifyobject
+#         print modifyobject
 #         modifyobjectxpath=modifyobject.values()
 #         modifyobjectelepath=modifyobject.keys()
         
@@ -396,7 +396,7 @@ if __name__ == '__main__':
 #     print str(excel_path.split(os.sep)[-1:]).split('\'')[1]
 #     mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
     
-    print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+#     print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
     mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
     
     

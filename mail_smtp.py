@@ -27,8 +27,6 @@ class mail():
             msg['subject'] = '请见邮件正文'+str(random.randint(1,99999999))
         msg["From"]  = mail['from_addr']
         msg["To"]   =  mail['to_addr']
-#         msg['From'] = _format_addr('来自 <%s>' % mail['from_addr'])
-#         msg['To'] = _format_addr('发给 <%s>' % mail['to_addr'])
            
             
         '#---这是内容部分---' 
@@ -47,11 +45,10 @@ class mail():
         try:
             print 'start email...'
             server = smtplib.SMTP(mail['smtp_server'], 25) # SMTP协议默认端口是25
-            server.set_debuglevel(1)
+#             server.set_debuglevel(1)
             server.login(msg["From"] , mail['password'])
             server.sendmail(msg["From"] , msg["To"].split(',')[0:], msg.as_string())
-#             server.sendmail(mail['from_addr'],['menglei@baicells.com','321385585@qq.com'], msg.as_string())
-            time.sleep(3)
+            time.sleep(0.5)
             server.quit()
             print 'email sucess...'
         except Exception, e:

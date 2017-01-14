@@ -42,13 +42,13 @@ class excel_perspective():
                 pass
             else:
                 a.append(row_values[i])
-        print 'a',a
+#         print 'a',a
                 
         "确定根据筛值出现的次数"
         b=[]
         for i in range(len(a)):
             b.append(row_values.count(a[i]))
-        print 'b',b
+#         print 'b',b
         
         '# #写入一行   '
         # worksheet.write_row('A1', headings, bold)  
