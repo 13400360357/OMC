@@ -20,8 +20,8 @@ class inquire():
 
         '2. 循环打开下拉列表，选择各个元素，并保存查询结果'
         nrows = 0
-#         for i in range(1,len(list)+1):
-        for i in range(1,2):
+        for i in range(1,len(list)+1):
+#         for i in range(1,2):
             sepacial_flag =0
 
             '1).打开下拉列表，选择查找元素，并点击执行'

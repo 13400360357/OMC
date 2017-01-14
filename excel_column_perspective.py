@@ -33,7 +33,7 @@ class excel_perspective():
         
         '透视第一个sheet'
         row_values=table1.col_values(0)
-        print row_values
+#         print row_values
         
         "依次筛选出想要的值"
         a=[]

@@ -21,8 +21,8 @@ class modify:
         nline=0
         commad_success_flag = 1
         'commad_success_flag是判断点击执行后，是否成功下发。'
-#         for round in range(1,len(modifyobject)+1):
-        for round in range(1,3):
+        for round in range(1,len(modifyobject)+1):
+#         for round in range(1,3):
             sepacial_flag=0
             b.find_element_by_xpath(yemianyuansu['select']).click()
             time.sleep(1)
