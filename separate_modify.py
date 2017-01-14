@@ -24,17 +24,21 @@ class modify:
 #         for round in range(1,len(modifyobject)+1):
         for round in range(1,3):
             sepacial_flag=0
-            select=b.find_element_by_xpath(yemianyuansu['select'])
-            ActionChains(b).move_to_element(select).click().perform()
+            b.find_element_by_xpath(yemianyuansu['select']).click()
             time.sleep(1)
+            
+            #===================================================================
+            # '截图看一下效果'
+            # self.b.save_screenshot('screenshot.png')
+            # print 'screenshot.png over...'            
+            #===================================================================
+            
             print '**************************** start test %d ************** total %d **************'%(round,len(modifyobject)),modifyobject['%d'%round]
             
             round_modify =b.find_element_by_xpath('//div[contains(text(),"%s")]'%modifyobject['%d'%round])
             time.sleep(1)
-            time.sleep(0.5)
             ActionChains(b).move_to_element(round_modify).double_click().perform()
-            time.sleep(0.5) 
-
+            time.sleep(1)
             print 'inquire  {quantity | type(input or select) | necessary or not...}'
 
             '1)确定有多少要被修改的元素,下一步确定是input或者select'          

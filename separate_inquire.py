@@ -27,90 +27,90 @@ class inquire():
             '1).打开下拉列表，选择查找元素，并点击执行'
             print '***************************start testing...      total %d      this is %d*******************************'%(i,len(list)),list['%d'%i]
             print self.yemianyuansu['select']
-            aa=self.b.find_element_by_xpath(self.yemianyuansu['select'])
-            ActionChains(self.b).move_to_element(aa).double_click().perform()
+            self.b.find_element_by_xpath(self.yemianyuansu['select']).click()
             time.sleep(1)
+            
+            #===================================================================
+            # '截图看一下效果'
+            # self.b.save_screenshot('screenshot.png')
+            # print 'screenshot.png over...'            
+            #===================================================================
             
             print 'ele is:',list['%d'%i]
             pp =self.b.find_element_by_xpath('//div[contains(text(),"%s")]'%list['%d'%i])
             time.sleep(1)
-#             ActionChains(self.b).double_click(pp).perform()
-            ActionChains(b).move_to_element(pp).double_click().perform()
+            ActionChains(self.b).move_to_element(pp).double_click().perform()
+            time.sleep(1)
+            #===================================================================
+            # '截图看一下效果'
+            # self.b.save_screenshot('screenshot1.png')
+            # print 'screenshot1.png over...'            
+            #===================================================================
+
             self.b.find_element_by_xpath(self.yemianyuansu['zhixing']).click()
             
             '写入开始时间'
             self.worksheet1.write(i,3,time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())))
-            
             time.sleep(1)
             nline=0
              
              
              
             '2).获得1、2行的查询结果，并保存到Excel表格'
-            '/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[元素]/div[索引]/div[列]/span[行]'
+            '//*[@id="showParamValues"]/div[元素]/span[行]'
             for m in range(1,3):
-                '1)).获取第1和2行的结果（1查询项、2基站ID），并保存Excel'
-                f='/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[%d]/span[%d]'%(i,m)
+                f='//*[@id="showParamValues"]/div[%d]/span[%d]'%(i,m)
                 try:
-                    g=WebDriverWait(self.b,300).until(lambda x: self.b.find_element_by_xpath(f)).text
+                    #===================================================================
+                    # '截图看一下效果'
+                    # self.b.save_screenshot('screenshot1.png')
+                    # print 'screenshot1.png over...'            
+                    #===================================================================
+                    g=WebDriverWait(self.b,20).until(lambda x: self.b.find_element_by_xpath(f)).text
                     self.worksheet2.write(nrows,0,g)
                     nrows+=1
+                    print '%d line is writting into Excel'%m
+                    time.sleep(0.2)
                 except:
                     self.worksheet2.write(nrows, 0,'等待结果超时，本元素终止查询')
                     nrows+=1
                     '等待结果超时，本项查询终止，进行下一项查询！'
                     print 'time out... end this ele . starting the next ele'
-                    break
-                finally:
-                    '写入具体完成时间'
-                    self.worksheet1.write(i,4,time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())))
-                    '查询第%d行的结果完成，数据已写入Excel'%m
-                    print '%d line is writting into Excel'%m
-                  
+                    
+            '写入具体完成时间'
+            self.worksheet1.write(i,4,time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())))
+            
             '3).获得所有索引（3、4、5、6、7、8...行）的结果'
             '(1).判断有多少个索引'   
-            try:
-                '结果返回错误值，将索引直接定义为1行'
-                for nlin in range(3,5):
-                    f='/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[%d]/span[%d]'%(i,nlin)
-                    self.b.find_element_by_xpath(f)
-                nline=1
-                        
-            except:
-                '正常返回值，判断多少个索引'
+            for nindex in range(1,22):
+                f='//*[@id="showParamValues"]/div[%d]/div[%d]'%(i,nindex)
                 try:
-                    for nlin in range(1,22):
-                        f='/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[%d]/div[%d]'%(i,nlin)
-                        self.b.find_element_by_xpath(f)
-                        nline=nlin
-                    '一共有行索引'
+                    self.b.find_element_by_xpath(f)
+                    nline=nindex
                 except:
-                    pass
-                '查询结果一共包含%d行'%(nline*2+2)
-     
+                    if nline>0:
+                        break
+                    else:
+                        nline=1
+            print '查询结果一共包含%d个索引'%(nline)
+                        
             '(2).判断索引有几列*******************'
             all_col=[]
             for n in range(1,22):
-                f='/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[%d]/div/div[%d]'%(i,n)
+                f='//*[@id="showParamValues"]/div[%d]/div/div[%d]'%(i,n)
                 try:
                     findele=self.b.find_element_by_xpath(f)
                     all_col.append(findele)
-                    'all_col为列数'
                 except:
                     if len(all_col)>=1:
                         '证明是有结果，可能只有1列，则不在进行查找'
                         break
                     else:
                         '没有返回正确结果，强制定为只有1列'
-                        f='/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[%d]/span[%d]'%(i)
-                        try:
-                            findele=self.b.find_element_by_xpath(f)
-                            all_col.append(findele)
-                            '错误的返回结果,强制定为只有1列（实际情况也只有1列）'
-                        except:
-                                pass
-                'all_col有%d列,具体元素为：'%(len(all_col)),all_col   
-                         
+#                         print 'failed result. all_col must=1 all_col.append('')'
+                        all_col.append('')
+            print 'all_col有%d列,具体元素为：'%(len(all_col)),all_col
+            
             '(3).获取内容导出到Excel*******************'
             '''i项目，ii,nline索引，iii行数（共2行）,n列数  '''
             for ii in range(1,nline+1):
@@ -118,13 +118,12 @@ class inquire():
                     for n in range(1,len(all_col)+1):
          
                         '1.获取第3和第4行的正常结果，具体数值'
-                        fff='/html/body/div[1]/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div[%d]/div[%d]/div[%d]/span[%d]'%(i,ii,n,iii)
+                        fff='//*[@id="showParamValues"]/div[%d]/div[%d]/div[%d]/span[%d]'%(i,ii,n,iii)
                         'm为：%d，查询元素的具体xpath为： %s'%(iii,f)
                         try:
                             g = self.b.find_element_by_xpath(fff).text
                             self.worksheet2.write(nrows,n-1,g)
                         except:
-                             
                             '2.获取第3和第4行的异常结果获取,，写入excel'
                             if ii==1 and iii==1 and n ==1:
                                 'iii==1(第三行) and n ==1（第一列）'
@@ -170,7 +169,6 @@ class inquire():
 
 
             print 'start the next...'
-                
         time.sleep(1)
         self.workbook.close()
         print '***************************test finished!   close workbook...'
@@ -228,11 +226,11 @@ if __name__ == '__main__':
     excel_perspective.run(excel_path)
     
     '邮件发送'
-    mail=mail()
-#     mail.fasong(r'%s'%str(excel_path.split(os.sep)[-1:]).split('\'')[1])
-    '打印一下Excel文件的具体路径+名称'
-    print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
-    mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+#     mail=mail()
+# #     mail.fasong(r'%s'%str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+#     '打印一下Excel文件的具体路径+名称'
+#     print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+#     mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
     
     
     
