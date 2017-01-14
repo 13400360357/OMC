@@ -104,10 +104,11 @@ class upgrade():
                     pass
       
             if bb == u'已结束' or bb == 'End':
-                print Task_Results.decode('utf-8'),'upgrade finished...'
+                print 'upgrade finished...'
+#                 print Task_Results.decode('utf-8'),'upgrade finished...'
                 break
             else:
-                print Task_Results.decode('utf-8')
+#                 print Task_Results
                 time.sleep(20)
                 
                  
