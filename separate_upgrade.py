@@ -257,12 +257,9 @@ if __name__ == '__main__':
     excel_perspective.run(excel_path)
     
     mail=mail()
-#     mail.fasong(r'%s'%str(excel_path.split(os.sep)[-1:]).split('\'')[1])
     '打印一下Excel文件的具体名称'
-    print str(excel_path.split(os.sep)[-1:]).split('\'')[1]
-    mail.fasong(r'%s'%(os.getcwd()+os.sep+str(excel_path.split(os.sep)[-1:]).split('\'')[1]))
-    
-        
+    print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+    mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])        
     
     
     
