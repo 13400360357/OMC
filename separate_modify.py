@@ -181,6 +181,7 @@ class modify:
             if len(select_ele)>0:
                 for num_select in range(1,len(select_ele)+1):
                     (select_ele[num_select-1]).select_by_value(inputkey.get(modifyobject['%d'%round],'select'+str(num_select)))
+                    
                     time.sleep(0.5)
                           
             '3.3 遗漏必选输入框，进行下发'
