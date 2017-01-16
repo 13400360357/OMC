@@ -84,6 +84,7 @@ class upgrade():
         WebDriverWait(b,100).until(lambda x: self.b.find_element_by_xpath('//div[contains(text(),"meng01")]'))
         
         '查找结果'
+        time.sleep(1)
         for i in range(3):
             aa=self.b.find_element_by_xpath('//*[@id="datagrid-row-r4-2-%d"]/td[2]/div'%i)
             if aa.text == 'meng01':
@@ -93,41 +94,46 @@ class upgrade():
         while True:
             bb=self.b.find_element_by_xpath('//*[@id="datagrid-row-r4-2-%d"]/td[6]/div'%i).text
             
-            try:
-                '升级前 执行结果栏 _进度状态的xpath：row-r13'
-                Task_Results =  self.b.find_element_by_xpath('//*[@id="datagrid-row-r13-2-%d"]/td[3]/div'%i).text
-            except:
-                try:
-                    '升级后 执行结果栏 _进度状态的xpath：row-r14 (加了1)'
-                    Task_Results =  self.b.find_element_by_xpath('//*[@id="datagrid-row-r14-2-%d"]/td[3]/div'%i).text
-                except:
-                    pass
+            
+            #===================================================================
+            # try:
+            #     '升级前 执行结果栏 _进度状态的xpath：row-r13'
+            #     Task_Results =  self.b.find_element_by_xpath('//*[@id="datagrid-row-r13-2-%d"]/td[3]/div'%i).text
+            # except:
+            #     try:
+            #         '升级后 执行结果栏 _进度状态的xpath：row-r14 (加了1)'
+            #         Task_Results =  self.b.find_element_by_xpath('//*[@id="datagrid-row-r14-2-%d"]/td[3]/div'%i).text
+            #     except:
+            #         pass
+            #===================================================================
       
             if bb == u'已结束' or bb == 'End':
                 print 'upgrade finished...'
-#                 print Task_Results.decode('utf-8'),'upgrade finished...'
+                print bb.encode('utf-8'),'upgrade finished...'
                 break
             else:
-#                 print Task_Results
+                print bb.encode('utf-8')
                 time.sleep(20)
                 
                  
         '判断升级是否成功'
         time.sleep(1)
         Upgrade_result=self.b.find_element_by_xpath('//*[@id="datagrid-row-r4-2-%d"]/td[7]/div'%i).text
-        time.sleep(0.2)
-        Task_Results =  self.b.find_element_by_xpath('//*[@id="datagrid-row-r14-2-%d"]/td[3]/div'%i).text
-#         
+#         time.sleep(0.2)
+#         Task_Results =  self.b.find_element_by_xpath('//*[@id="datagrid-row-r21-2-%d"]/td[3]/div'%i).text
+
+         
         print Upgrade_result.encode('utf-8')
-        print Task_Results.encode('utf-8')
+#         print Task_Results.encode('utf-8')
         if Upgrade_result==u'成功' or  Upgrade_result == 'upgrade complete':
             print 'upgrade success...'
             pass
         else:
-            print 'upgrade failed,resean:',Upgrade_result.encode('utf-8')
+            print 'upgrade failed:',Upgrade_result.encode('utf-8')
         time.sleep(1)
         
-        return Upgrade_result,Task_Results
+#         return Upgrade_result,Task_Results
+        return Upgrade_result
 
 
     def delete(self):
@@ -248,7 +254,8 @@ if __name__ == '__main__':
          
         '退出登录'
         logout.run(b)
-        time.sleep(60)
+        time.sleep(30)
+        
         
         
     workbook.close()
@@ -256,7 +263,7 @@ if __name__ == '__main__':
     
     excel_perspective=excel_perspective()
     excel_perspective.run(excel_path)
-    
+     
     mail=mail()
     '打印一下Excel文件的具体名称'
 #     print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])

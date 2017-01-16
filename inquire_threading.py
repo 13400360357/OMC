@@ -174,67 +174,64 @@ class inquire():
         print '***************************test finished!   close workbook...'
 
 if __name__ == '__main__':
-    def inquire():
-        '各种实例化'
-        browser=browser()
-        excel=CreateExcel()
-        ini=importinfo()
-        opencatalogue=opencatalogue()
-        
-        '登录'
-        b=browser.run()
-        login=login(b)
-        login.run()
-        workbook,worksheet1,worksheet2,excel_path=excel.run('inquire')
-        worksheet1.write(0,0,'Upgrade_result')
-        worksheet1.write(0,1,'jijizhan')
-        worksheet1.write(0,2,'LST_parameter')
-        worksheet1.write(0,3,'start time')
-        worksheet1.write(0,4,'finish time')
-        
-        try:
-            b.find_element_by_xpath('/html/body/div[39]/div[3]/a/span/span').click()
-        except:
-            pass
-        
-        '导入左侧目录xpath'
-        zuocemulu_xpath=ini.run('web_ele.ini','zuocemulu')
-        time.sleep(0.5)
-        catalogue_xpath=zuocemulu_xpath.pop('jizhan')
-        son_catalogue_xpath=zuocemulu_xpath.pop('jizhan_peizhi')   
-        
-        '打开左侧目录'
-        time.sleep(0.5)
-        opencatalogue.run(b,catalogue_xpath,son_catalogue_xpath)
-        time.sleep(0.5)
-        yemianyuansu=ini.run('web_ele.ini', 'yemianyuansu')
-        
-        '选定基站执行'
-        time.sleep(1)
-        ddd =WebDriverWait(b,20).until(lambda x: b.find_element_by_xpath(yemianyuansu['chaxunshuru']))
-        ddd.send_keys(yemianyuansu['jizhan_kuandai'])
-        time.sleep(1)
-        b.find_element_by_xpath(yemianyuansu['chaxunanniu']).click()
-        time.sleep(1)
-        b.find_element_by_xpath(yemianyuansu['xuandinganniu']).click()
-        
-        '开始查询，并保存结果'
-        session2=inquire(b, yemianyuansu,workbook, worksheet1,worksheet2)
-        session2.run(ini,'web_ele.ini','chaxun')
+
+    '各种实例化'
+    browser=browser()
+    excel=CreateExcel()
+    ini=importinfo()
+    opencatalogue=opencatalogue()
     
-        '透视'
-        excel_perspective=excel_perspective()
-        excel_perspective.run(excel_path)
-        
-        '邮件发送'
-        mail=mail()
-        '打印一下Excel文件的具体路径+名称'
-    #     print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
-        mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
-    th=[threading.Thread(target=inquire) for i in range(3)]
-    for t in th:
-        t.start()
+    '登录'
+    b=browser.run()
+    login=login(b)
+    login.run()
+    workbook,worksheet1,worksheet2,excel_path=excel.run('inquire')
+    worksheet1.write(0,0,'Upgrade_result')
+    worksheet1.write(0,1,'jijizhan')
+    worksheet1.write(0,2,'LST_parameter')
+    worksheet1.write(0,3,'start time')
+    worksheet1.write(0,4,'finish time')
     
+    try:
+        b.find_element_by_xpath('/html/body/div[39]/div[3]/a/span/span').click()
+    except:
+        pass
+    
+    '导入左侧目录xpath'
+    zuocemulu_xpath=ini.run('web_ele.ini','zuocemulu')
+    time.sleep(0.5)
+    catalogue_xpath=zuocemulu_xpath.pop('jizhan')
+    son_catalogue_xpath=zuocemulu_xpath.pop('jizhan_peizhi')   
+    
+    '打开左侧目录'
+    time.sleep(0.5)
+    opencatalogue.run(b,catalogue_xpath,son_catalogue_xpath)
+    time.sleep(0.5)
+    yemianyuansu=ini.run('web_ele.ini', 'yemianyuansu')
+    
+    '选定基站执行'
+    time.sleep(1)
+    ddd =WebDriverWait(b,20).until(lambda x: b.find_element_by_xpath(yemianyuansu['chaxunshuru']))
+    ddd.send_keys(yemianyuansu['jizhan_kuandai'])
+    time.sleep(1)
+    b.find_element_by_xpath(yemianyuansu['chaxunanniu']).click()
+    time.sleep(1)
+    b.find_element_by_xpath(yemianyuansu['xuandinganniu']).click()
+    
+    '开始查询，并保存结果'
+    session2=inquire(b, yemianyuansu,workbook, worksheet1,worksheet2)
+    session2.run(ini,'web_ele.ini','chaxun')
+
+    '透视'
+    excel_perspective=excel_perspective()
+    excel_perspective.run(excel_path)
+    
+    '邮件发送'
+    mail=mail()
+    '打印一下Excel文件的具体路径+名称'
+#     print ('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+    mail.fasong('report'+os.sep+'perspective_'+str(excel_path.split(os.sep)[-1:]).split('\'')[1])
+
     
     
     

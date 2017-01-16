@@ -7,10 +7,9 @@ from mail_smtp import mail
 from excel_column_perspective import excel_perspective
 
 class inquire():
-    def __init__(self,b,yemianyuansu,workbook,worksheet1,worksheet2):
+    def __init__(self,b,yemianyuansu,worksheet1,worksheet2):
         self.b=b
         self.yemianyuansu=yemianyuansu
-        self.workbook=workbook
         self.worksheet1=worksheet1
         self.worksheet2=worksheet2
 
@@ -20,8 +19,8 @@ class inquire():
 
         '2. 循环打开下拉列表，选择各个元素，并保存查询结果'
         nrows = 0
-        for i in range(1,len(list)+1):
-#         for i in range(1,2):
+#         for i in range(1,len(list)+1):
+        for i in range(1,2):
             sepacial_flag =0
 
             '1).打开下拉列表，选择查找元素，并点击执行'
@@ -168,7 +167,6 @@ class inquire():
 
             print 'start the next...'
         time.sleep(1)
-        self.workbook.close()
         print '***************************test finished!   close workbook...'
 
 if __name__ == '__main__':
@@ -216,9 +214,10 @@ if __name__ == '__main__':
     b.find_element_by_xpath(yemianyuansu['xuandinganniu']).click()
     
     '开始查询，并保存结果'
-    session2=inquire(b, yemianyuansu,workbook, worksheet1,worksheet2)
+    session2=inquire(b, yemianyuansu, worksheet1,worksheet2)
     session2.run(ini,'web_ele.ini','chaxun')
 
+    workbook.close()
     '透视'
     excel_perspective=excel_perspective()
     excel_perspective.run(excel_path)
